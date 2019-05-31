@@ -1,15 +1,19 @@
 <% if can? :edit, Event %>
-  <%=link_to 'Edit', edit_event_path(@event) %> |
+  <%=link_to 'Edit', edit_event_path(@event) %> 
 <% end %>
 
 <h2><%=@event.name%></h2>
 <p><%=@event.description%></p>
 <p><%=@event.start_date%></p>
+<p>Venue: <%=@event.event_venue.name%></p>
+<p>Capacity: <%=@event.event_venue.capacity%></p>
+
+<div class="round-image-50"><%= image_tag(@event.avatar.url) %></div>
 
 <h3>About the event evenue</h3>
 
 <% if can? :create, Order %>
-<h3>Buy a ticket!</h3>
+<h3>Buy a ticket!</h3><br>
 
 <%=form_with(url:'/shopping_cart/add', local: true) do |form| %>
     <%=form.select(:ticket_type_id,
@@ -23,16 +27,12 @@
                         ttype
                      }, :id, :zone_details)
      ) %>
-    <%=form.select(:amount, options_for_select((1..10).map { |val| [val, val]} )) %>
+    <%=form.select(:amount, options_for_select((1..10).map { |val| [val, val]} )) %><br>
   <div class="actions">
-    <%= form.submit 'Add to cart' %>
+    <br><%= form.submit 'Add to cart' %>
   </div>
 <%end # form%>
 <%end # can%>
-<ul>
-  <li>Venue: <%=@event.event_venue.name%></li>
-  <li>Capacity: <%=@event.event_venue.capacity%></li>
-</ul>
 
 
 <%= link_to 'Back', :back %>
