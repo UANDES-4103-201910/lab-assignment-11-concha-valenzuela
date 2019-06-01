@@ -1,16 +1,12 @@
-<% if can? :edit, Event %>
-  <%=link_to 'Edit', edit_event_path(@event) %> 
+<% if can? :edit, TicketType %>
+  <%=link_to 'Edit', edit_ticket_type_path(@ticket_type) %> 
 <% end %>
 
-<h2><%=@event.name%></h2>
-<p><%=@event.description%></p>
-<p><%=@event.start_date%></p>
-<p>Venue: <%=@event.event_venue.name%></p>
-<p>Capacity: <%=@event.event_venue.capacity%></p>
+<h2><%=Event.find(@ticket_type.event_id).name%></h2>
+<h4><%=TicketZone.find(@ticket_type.ticket_zone_id).zone%></h4>
+<h4><%=@ticket_type.price%></h4>
 
-<div class="round-image-50"><%= image_tag(@event.avatar.url) %></div>
 
-<h3>About the event evenue</h3>
 
 <% if can? :create, Order %>
 <h3>Buy a ticket!</h3><br>
@@ -18,7 +14,7 @@
 <%=form_with(url:'/shopping_cart/add', local: true) do |form| %>
     <%=form.select(:ticket_type_id,
                  options_from_collection_for_select(
-                     TicketType.where(event_id: @event.id).map { |ttype|
+                     TicketType.where(id: @ticket_type.id).map { |ttype|
                         zone = TicketZone.find(ttype.ticket_zone_id)
                         class << ttype
                           attr_accessor :zone_details

@@ -14,9 +14,9 @@
   <tbody>
     <% @cart.each do |k,v|%>
       <tr>
-        <td><%= TicketType.find(k).event.name %></td>
-        <td><%= TicketType.find(k).event.start_date.in_time_zone() %></td>
-        <td><%= TicketType.find(k).ticket_zone.zone %></td>
+        <td><%= Event.find(TicketType.find(k).event_id).name %></td>
+        <td><%= Event.find(TicketType.find(k).event_id).start_date.in_time_zone() %></td>
+        <td><%= TicketZone.find(TicketType.find(k).ticket_zone_id).zone %></td>
         <td><%= TicketType.find(k).price %></td>
         <td><%= v %></td>
         <% total += v*TicketType.find(k).price %>
