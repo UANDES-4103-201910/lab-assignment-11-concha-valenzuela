@@ -16,6 +16,8 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    2.times { @event.ticket_types.build }
+
   end
 
   # GET /events/1/edit
@@ -71,7 +73,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.fetch(:event, {}).permit(:name, :description, :start_date, :event_venue_id, :avatar)
+      params.fetch(:event, {}).permit(:name, :description, :start_date, :event_venue_id, :avatar, ticket_types_attributes: [:id, :price, :ticket_zone_id, :_destroy])
     end
 
 end

@@ -25,6 +25,17 @@
   <strong>Seleccione una imagen</strong><br>
   <%= form.file_field :avatar %><br>
 
+
+    <%= form.fields_for :ticket_types do |ticket_types_form| %>
+      <br><strong><%= ticket_types_form.label :ticket_zone_id %><br></strong>
+      <%= ticket_types_form.select(:ticket_zone_id, options_from_collection_for_select(TicketZone.all, :id, :zone))%><br><br>
+      <%= ticket_types_form.label :price %>
+      <%= ticket_types_form.text_field :price %>
+ 
+
+    <% end %>
+
+
   <div class="actions">
     <br><%= form.submit %>
   </div>

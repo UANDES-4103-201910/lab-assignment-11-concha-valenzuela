@@ -20,12 +20,24 @@ class ShoppingCartsController < ApplicationController
     #render plain: "success! " + session[:shopping_cart].inspect
   end
 
-  def remove_ticket
-    # TODO
+  def destroy
+    session[:shopping_cart].delete(shopping_cart_params[:ticket_type_id])
+    redirect_to "http://localhost:3000/shopping_cart"
   end
 
   def index
     # Not much to do here...
+  end
+
+  def checkout
+
+    if session[:shopping_cart].nil?
+      @cart = []
+    else
+      @cart = Hash[*session[:shopping_cart].group_by{ |v| v.to_i }.flat_map{ |k, v| [k, v.size] }]
+      session[:shopping_cart] = []
+    end
+    
   end
 
   private

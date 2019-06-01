@@ -1,0 +1,27 @@
+<h1>Receipt</h1><br>
+
+<% total = 0 %>
+<p><%= DateTime.now %></p><br>
+<table>
+  <tr>
+    <th>Event</th>
+      <th>Date</th>
+      <th>Ticket</th>
+      <th>Price   </th>
+      <th>Amount</th>
+  </tr>
+
+  <tbody>
+    <% @cart.each do |k,v|%>
+      <tr>
+        <td><%= TicketType.find(k).event.name %></td>
+        <td><%= TicketType.find(k).event.start_date.in_time_zone() %></td>
+        <td><%= TicketType.find(k).ticket_zone.zone %></td>
+        <td><%= TicketType.find(k).price %></td>
+        <td><%= v %></td>
+        <% total += v*TicketType.find(k).price %>
+    <% end %>
+  </tbody>
+</table>
+
+<br><h4>Total: <%= total %></h4>
