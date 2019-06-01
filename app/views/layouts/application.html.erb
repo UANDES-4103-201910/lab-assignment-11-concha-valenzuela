@@ -17,15 +17,16 @@
             <a class="navbar-brand" href = 'http://localhost:3000'> TicketTopia
             </a>
 
+            <% if user_signed_in? %>
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:3000/events">Events</a>
+                </li>
 
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="http://localhost:3000/events">Events</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="http://localhost:3000/ticket_types">Ticket Types</a>
-              </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:3000/ticket_types">Ticket Types</a>
+                </li>
+            <% end %>
 
 
 

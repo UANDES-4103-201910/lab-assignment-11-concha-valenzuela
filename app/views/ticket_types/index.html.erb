@@ -20,13 +20,16 @@
         <td><%= TicketZone.find(tt.ticket_zone_id).zone %></td>
         <td><%= tt.price %></td>
         <td><%= link_to 'Show', tt %></td>
-        <td><%= link_to 'Edit', edit_ticket_type_path(tt) %></td>
-        <td><%= link_to 'Destroy', tt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%if can? :edit, TicketType%>
+          <td><%= link_to 'Edit', edit_ticket_type_path(tt) %></td>
+          <td><%= link_to 'Destroy', tt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Ticket Type', new_ticket_type_path %>
+<%if can? :edit, TicketType%>
+  <%= link_to 'New Ticket Type', new_ticket_type_path %>
+<%end%>

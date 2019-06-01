@@ -23,7 +23,7 @@ class TicketTypesController < ApplicationController
  
     if @ticket_type.save(ticket_type_params)
 
-      redirect_to @ticket_type
+      redirect_to ticket_type_path(@ticket_type)
     else
       render 'new'
     end
